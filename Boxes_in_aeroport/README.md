@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # **Hidden camera at the airport**
 ![](https://www.skladovka.ua/wp-content/uploads/2018/06/Kamera-hraneniya-Kiev.jpg)
 ## ***If hideout 1 is vacated, then another person can occupy that exact hideout at that time, if not, then take the free one***
@@ -59,3 +60,6 @@ python
     print(name_list[i], num)
 ```
 ![]()
+=======
+# ManuL
+>>>>>>> origin/main
