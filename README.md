@@ -11,7 +11,7 @@ k = int(input("count pasangers: "))
 ___
 ### We check the quantity
 >if 3<=n<=1000:
->>name_list = []   
+>>name_list = [] 
 >>list_start_sort = []   
 >>list_finish = []
 ___
