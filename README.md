@@ -47,12 +47,15 @@ python
             if list_start[i] < list_finish[b] and list_finish[i] > list_start[b]:
 ```
 - *if done, num +1*
->>>>> num += 1              
->>>>>if list_start[i] < list_start[b]:
->>>>>> num = 1
+python
+````
+            num += 1              
+                if list_start[i] < list_start[b]:
+                    num = 1
+````
 - *We display the names and numbers of their cells*
 python
 ```
-print(name_list[i], num)
+    print(name_list[i], num)
 ```
 ![]()
