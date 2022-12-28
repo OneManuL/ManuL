@@ -1,15 +1,18 @@
+import datetime
+
 import telebot
 import json
+import time
 from random import randint
-logo_bad_choie = ['7.png', 'bad_choose.jpg', '103.png', '10.png','107.png','71.png']
-logo_start = ['start.jpg', 'images.jpeg']
-logo_good_life = ['115.png','114.png','26.png','60.png','91.png','93.png']
-logo_add_money = []
+logo_bad_choie = ['7.png', '103.png', '10.png','107.png','71.png','13.png']
+logo_start = ['start.jpg', 'images.jpeg', '1.jpeg','2.jpg','3.jpg']
+logo_good_life = ['115.png','114.png','26.png','60.png','91.png','93.png','8.png','20.png']
+
 
 
 config = {
-    "name": 'garry_seldon_bot',
-    "token": 'xxxxxxxxxxxx'
+    "name": 'xxxxxxxxxx',
+    "token": 'xxxxxxxxxxxxxxxxx'
 }
 keyboard = telebot.types.ReplyKeyboardMarkup(resize_keyboard=True)
 #one_time_keyboard=True шоб кнопки зникали
@@ -46,8 +49,7 @@ def get_text(message):
             sara.register_next_step_handler(sara.send_message(message.chat.id, 'Введіть слово Паляница🥯'), ukrainian_or_no)
         else:
             if message.text == '💰 Переглянути гаманець 💰':
-                sara.register_next_step_handler(sara.send_message(message.chat.id, "Введіть +, якщо любите маму, а ми поки зв'язуємось з банком🏦"), show_money)
-
+                show_money(message)
 
             elif message.text == '✅ Додати ✅':
                 sara.register_next_step_handler(sara.send_message(message.chat.id, 'Введіть сумму, яку потрібно додати🏦'), add_money)
@@ -56,15 +58,24 @@ def get_text(message):
                 sara.register_next_step_handler(sara.send_message(message.chat.id, 'Введіть сумму, яку потрібно зняти з рахунку🏦'), fire_money)
 
             elif message.text == '📈 Статистика 📈':
-                rand = randint(0, len(logo_good_life) - 1)
-                with open(f'gif/{logo_good_life[rand]}', 'rb') as photo:
-                    sara.send_photo(message.chat.id, photo)
-                sara.send_message(message.chat.id, 'Вам доступна пробна версія телеграм бота, якщо ви хочете збільшити'
-                                                   ' можливості відправте 100грн на картковий рахунок: 5375414127844099')
+                statistic(message)
+
             else:
                 sara.send_message(message.chat.id, 'Окреме спілкування не передбачено🥲')
     except:
         sara.send_message(message.chat.id, 'Неочікуване введення оберіть дію на панелі кнопок🙃')
+
+
+def statistic(message):
+    try:
+        rand = randint(0, len(logo_good_life) - 1)
+        with open(f'gif/{logo_good_life[rand]}', 'rb') as photo:
+            sara.send_photo(message.chat.id, photo)
+        with open('money_all_history.txt', 'r') as file:
+            show = file.read()
+            sara.send_message(message.chat.id, '\n' + show)
+    except:
+        sara.send_message(message.chat.id, 'Неочікуване введення оберіть кнопоку🙃')
 
 
 def ukrainian_or_no(message):
@@ -95,6 +106,9 @@ def show_money(message):
 
 def add_money(message):
     try:
+        with open('money_all_history.txt', 'a') as file2:
+            file2.write(f"\n{datetime.datetime.now()}\n+" + message.text)
+
         with open('money.json', 'r') as file:
             file_r = json.load(file)
             file_r['money'] = int(file_r['money']) + int(message.text)
@@ -112,6 +126,9 @@ def add_money(message):
 
 def fire_money(message):
     try:
+        with open('money_all_history.txt', 'a') as file2:
+            file2.write(f"\n{datetime.datetime.now()}\n-" + message.text)
+
         with open('money.json', 'r') as file:
             file_r = json.load(file)
             file_r['money'] = int(file_r['money']) - int(message.text)
@@ -127,9 +144,27 @@ def fire_money(message):
         sara.send_message(message.chat.id, 'Неочікуване введення🙃')
 
 
+# def write_st(message):
+#
+#     with open('money_all_history.txt', 'a') as file:
+#         file1 = file.write()
+
+
+
 @sara.callback_query_handler(func=lambda call: True)
 def callback_data(call):
-    pass
+    if call.message:
+        if call.data == 'vidguk':
+            sara.send_message(call.message.chat.id, "Поки не працює")
+            # show_vidguk(call)
+        elif call.data == "vidguk_w":
+            sara.send_message(call.message.chat.id, "Поки не працює")
+            # show_vidguk(call)
+        elif call.data == 'buy':
+            sara.send_message(call.message.chat.id, "Генеруємо посилання для оплати")
+        elif call.data == "koshik":
+            sara.send_message(call.message.chat.id, "Товар успішно додано до кошику")
 
 
-sara.polling(none_stop=True, interval=1)
+sara.polling(none_stop=True, interval=0)
+
