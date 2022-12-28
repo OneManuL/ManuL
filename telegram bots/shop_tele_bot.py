@@ -2,8 +2,8 @@ import telebot
 import json
 
 config = {
-    "name": 'garry_seldon_bot',
-    "token": '5626631612:AAFP90Rdn4gPWFsYU_YN_w-B7h9MrGNvD7E'
+    "name": 'xxxxx',
+    "token": 'xxxxxxxx'
 }
 keyboard = telebot.types.ReplyKeyboardMarkup(resize_keyboard=True)
 
