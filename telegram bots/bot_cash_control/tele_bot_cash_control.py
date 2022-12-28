@@ -4,15 +4,14 @@ import telebot
 import json
 import time
 from random import randint
-logo_bad_choie = ['7.png', '103.png', '10.png','107.png','71.png','13.png']
-logo_start = ['start.jpg', 'images.jpeg', '1.jpeg','2.jpg','3.jpg']
-logo_good_life = ['115.png','114.png','26.png','60.png','91.png','93.png','8.png','20.png']
+
+logo_bad_choie = ['7.png', '103.png', '10.png', '107.png', '71.png', '13.png']
+logo_start = ['start.jpg', 'images.jpeg', '1.jpeg', '2.jpg', '3.jpg']
+logo_good_life = ['115.png', '114.png', '26.png', '60.png', '91.png', '93.png', '8.png', '20.png']
 
 
 
-config = {
-    "name": 'xxxxxxxxxx',
-    "token": 'xxxxxxxxxxxxxxxxx'
+#need config
 }
 keyboard = telebot.types.ReplyKeyboardMarkup(resize_keyboard=True)
 #one_time_keyboard=True шоб кнопки зникали
@@ -75,7 +74,7 @@ def statistic(message):
             show = file.read()
             sara.send_message(message.chat.id, '\n' + show)
     except:
-        sara.send_message(message.chat.id, 'Неочікуване введення оберіть кнопоку🙃')
+        sara.send_message(message.chat.id, 'Історії транзакцій немає, або неочікуване введення оберіть кнопоку🙃')
 
 
 def ukrainian_or_no(message):
@@ -151,19 +150,19 @@ def fire_money(message):
 
 
 
-@sara.callback_query_handler(func=lambda call: True)
-def callback_data(call):
-    if call.message:
-        if call.data == 'vidguk':
-            sara.send_message(call.message.chat.id, "Поки не працює")
-            # show_vidguk(call)
-        elif call.data == "vidguk_w":
-            sara.send_message(call.message.chat.id, "Поки не працює")
-            # show_vidguk(call)
-        elif call.data == 'buy':
-            sara.send_message(call.message.chat.id, "Генеруємо посилання для оплати")
-        elif call.data == "koshik":
-            sara.send_message(call.message.chat.id, "Товар успішно додано до кошику")
+# @sara.callback_query_handler(func=lambda call: True)
+# def callback_data(call):
+#     if call.message:
+#         if call.data == 'vidguk':
+#             sara.send_message(call.message.chat.id, "Поки не працює")
+#             # show_vidguk(call)
+#         elif call.data == "vidguk_w":
+#             sara.send_message(call.message.chat.id, "Поки не працює")
+#             # show_vidguk(call)
+#         elif call.data == 'buy':
+#             sara.send_message(call.message.chat.id, "Генеруємо посилання для оплати")
+#         elif call.data == "koshik":
+#             sara.send_message(call.message.chat.id, "Товар успішно додано до кошику")
 
 
 sara.polling(none_stop=True, interval=0)
