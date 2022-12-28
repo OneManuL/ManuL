@@ -9,7 +9,7 @@ logo_add_money = []
 
 config = {
     "name": 'garry_seldon_bot',
-    "token": '5626631612:AAFP90Rdn4gPWFsYU_YN_w-B7h9MrGNvD7E'
+    "token": 'xxxxxxxxxxxx'
 }
 keyboard = telebot.types.ReplyKeyboardMarkup(resize_keyboard=True)
 #one_time_keyboard=True шоб кнопки зникали
